@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build-index && npm run build-app",
-    "build-index": "node index.js",
+    "build-index": "node index.js --base \"/markdown-blog/\"",
     "build-app": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",

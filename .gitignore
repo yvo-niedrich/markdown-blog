@@ -28,4 +28,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
-public/index
+public/registry.json
+public/searchindex.json

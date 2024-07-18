@@ -10,6 +10,7 @@ const args = arg({
 	'--help': Boolean,
 	'--version': Boolean,
 
+    '--base': String,
     '--publicFolder': String,
 	'--documentPath': String,
 	'--imagePath': String,
@@ -42,6 +43,7 @@ function resolvePath(p, from = null) {
     return path.posix.resolve(from, p);
 }
 
+const applicationBasePath = args['--publicFolder'] || '';
 const publicPath = path.posix.resolve(args['--publicFolder'] || './public');
 const documentRootDirectory = path.posix.resolve(publicPath, args['--documentPath'] || 'documents');
 const imageRootDirectory = path.posix.resolve(publicPath, args['--imagePath'] || 'images');
@@ -179,7 +181,7 @@ function UrlRelativeFromPublic(filePath) {
     if (filePath.indexOf(publicPath) >= 0) {
         return filePath.slice(publicPath.length);
     }
-    return filePath;
+    return applicationBasePath + filePath;
 }
 
 function normalizeText(text) {
