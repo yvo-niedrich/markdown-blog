@@ -1,0 +1,47 @@
+{
+  "name": "recipes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build-index && npm run build-app",
+    "build-index": "node index.js",
+    "build-app": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "markdown-it": "^14.1.0",
+    "markdown-it-vue": "^1.1.7",
+    "natural": "^7.1.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.29",
+    "vue-i18n": "^9.13.1",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/jsdom": "^21.1.7",
+    "@types/markdown-it": "^14.1.1",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.5.1",
+    "arg": "^5.0.2",
+    "jsdom": "^24.1.0",
+    "npm-run-all2": "^6.2.0",
+    "sass": "^1.77.8",
+    "scss": "^0.2.4",
+    "stopword": "^3.0.1",
+    "typescript": "~5.4.0",
+    "unorm": "^1.6.0",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0",
+    "vue-tsc": "^2.0.21"
+  }
+}
