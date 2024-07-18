@@ -48,6 +48,7 @@ watch(query, search);
     }
     
     input {
+        background-color: var(--background-muted);
         display: block;
         font-size: .9em;
         width: 100%;
@@ -56,7 +57,11 @@ watch(query, search);
         border-radius: .8em;
         border: 1px solid var(--vt-c-divider-dark-2);
         outline: none;
-        &:hover, &:active {
+
+        color: var(--color-text);
+
+        &:hover, &:active, &:focus {
+            background-color: var(--color-background-soft);
             border: 1px solid var(--vt-c-divider-dark-1);
         }
 

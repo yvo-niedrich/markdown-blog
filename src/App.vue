@@ -61,7 +61,6 @@ header {
         &:active h1,
         &:hover h1 {
             transform: rotate(-35deg);
-            text-shadow: 1px 1px 1px black, 0 0 4px #fff, 0 0 1em #fff;
         }
         
         h1 {
@@ -69,7 +68,7 @@ header {
             top: 0.6em;
             left: 0.4em;
             font-weight: bold;
-            text-shadow: 1px 1px 2px black, 0 0 4px #fff, 0 0 1em #fff, 0 0 0.2em #fff;
+            text-shadow: 1px 1px 2px black, 1px 1px 3px black, 0 0 5px var(--color-text), 0 0 1em var(--color-text), 0 0 0.2em var(--color-text);
 
             margin: 0;
             padding: 0;
@@ -77,7 +76,7 @@ header {
             font-size: 2.4em;
             transform: rotate(-25deg);
             
-            transition: left .5s, transform 3s;
+            transition: left .5s, transform 2.5s;
 
             @media (max-width: 800px) {
                 left: -.9em;
@@ -113,6 +112,10 @@ nav {
     font-size: .9em;
     text-align: center;
     margin: 0.5rem 0;
+
+    @media (max-width: 650px) {
+        font-size: 0.75em;
+    }
 
     a.router-link-exact-active {
         color: var(--color-text);

@@ -1,27 +1,33 @@
 <script setup lang="ts">
+import resolvePath from "@/helper/resolvePath";
 import MarkdownIt from "markdown-it";
 import type { RenderRule } from "markdown-it/lib/renderer.mjs";
 
-const markdown = new MarkdownIt();
+defineProps({ source: { type: String, default: ""}, content: { type: String, default: ""}});
 
-const basePath = import.meta.env.BASE_URL;
-if (basePath) {
+function renderFile(file: string, content: string) {
+
+    const markdown = new MarkdownIt();
     const defaultImageRenderer = markdown.renderer.rules.image as RenderRule;
     markdown.renderer.rules.image = (tokens, idx, options, env, self) => {
         const src = tokens[idx].attrGet('src')
-        if (src && src.startsWith('/')) {
-            tokens[idx].attrSet('src', basePath + src)
+        if (src && !src.startsWith('/')) {
+            const newPath = resolvePath(src, file.replace(/\/([^\/])+\.md/i, ''));
+
+            console.log(src, file, newPath);
+
+            tokens[idx].attrSet('src', newPath)
         }
         
         return defaultImageRenderer(tokens, idx, options, env, self)
     };
+    return markdown.render(content);
 }
 
-defineProps({ source: { type: String, default: ""}});
 </script>
 
 <template>
-    <div class="recipe" v-html="markdown.render(source)" />
+    <div class="recipe" v-html="renderFile(source, content)" />
 </template>
 
 <style lang="scss">

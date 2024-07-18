@@ -43,7 +43,7 @@ function resolvePath(p, from = null) {
     return path.posix.resolve(from, p);
 }
 
-const applicationBasePath = args['--publicFolder'] || '';
+const applicationBasePath = args['--base'] || '';
 const publicPath = path.posix.resolve(args['--publicFolder'] || './public');
 const documentRootDirectory = path.posix.resolve(publicPath, args['--documentPath'] || 'documents');
 const imageRootDirectory = path.posix.resolve(publicPath, args['--imagePath'] || 'images');
@@ -146,6 +146,20 @@ function readFileContent(filePath) {
     return fs.readFileSync(filePath, 'utf-8');
 }
 
+function UrlRelativeFromPublic(filePath) {
+    if (!filePath) return filePath;
+
+    if(!filePath.startsWith('/')) {
+        filePath = resolvePath(filePath);
+    }
+
+    if (filePath.indexOf(publicPath) >= 0) {
+        filePath = filePath.slice(publicPath.length);
+    }
+
+    return (applicationBasePath + filePath).replaceAll(/(\/){2,}/g, '/');
+}
+
 const markdownImageLink = /!\[(?:[^\]]*)\]\(([^\)]+)\)/gm;
 function buildRegistry(files) {
     const registry = [];
@@ -169,19 +183,6 @@ function buildRegistry(files) {
         });
     });
     return registry;
-}
-
-function UrlRelativeFromPublic(filePath) {
-    if (!filePath) return filePath;
-
-    if(!filePath.startsWith('/')) {
-        filePath = resolvePath(filePath);
-    }
-
-    if (filePath.indexOf(publicPath) >= 0) {
-        return filePath.slice(publicPath.length);
-    }
-    return applicationBasePath + filePath;
 }
 
 function normalizeText(text) {
