@@ -8,7 +8,7 @@ const query = ref('');
 
 const search = debounce(function() {
     if (query.value.length > 2) router.push('/search/' + encodeURIComponent(query.value));
-}, 400);
+}, 300);
 
 watch(query, search);
 
@@ -23,7 +23,7 @@ watch(query, search);
             </svg>
         </div>
         <input type="search" v-model="query" @focus="search" placeholder="Search..." />
-        </div>
+    </div>
     
 </template>
 
@@ -31,19 +31,37 @@ watch(query, search);
 
 .search-btn {
     position: relative;
-
+    
     .search-btn-icon {
         position: absolute;
-        top: 0.7em;
+        top: 0.75em;
         left: 0;
         flex: auto;
         align-items: center;
         pointer-events: none;
         padding-inline-start: 0.75rem; 
-
+        
         svg {
-            width: 1.3em;
-            height: 1.3em;
+            width: 1.1em;
+            height: 1.1em;
+        }
+        
+        @media (max-width: 800px) {
+            padding-inline-start: 0.7rem; 
+            top: 0.6em;
+            svg {
+                width: .95em;
+                height: .95em;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            padding-inline-start: 0.6rem;
+            top: 0.55em;
+            svg {
+                width: .85em;
+                height:.85em;
+            }
         }
     }
     
@@ -57,17 +75,29 @@ watch(query, search);
         border-radius: .8em;
         border: 1px solid var(--vt-c-divider-dark-2);
         outline: none;
-
+        
         color: var(--color-text);
-
+        
         &:hover, &:active, &:focus {
             background-color: var(--color-background-soft);
             border: 1px solid var(--vt-c-divider-dark-1);
         }
-
+        
         &::placeholder {
             color: gray;
         }
+        
+        @media (max-width: 800px) {
+            padding: 0.75em 0.75em 0.75em 2.4em;
+        }
+        
+        @media (max-width: 800px) {
+            padding: 0.75em 0.75em 0.75em 2em;
+        }
+        
+        // @media (max-width: 650px) {
+        //     width: 100%;
+        // }
     }
 }
 

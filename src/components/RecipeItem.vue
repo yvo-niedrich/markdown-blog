@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 defineProps<{
     record: RecipeRegistryRecord
 }>();
 
+const router = useRouter();
 function placeholderImage(index: number) {
     return import.meta.env.BASE_URL + 'placeholder/placeholder' + (index % 4 + 1) + ".png"
 }
@@ -12,7 +13,7 @@ function placeholderImage(index: number) {
 <template>
     <div class="item">
         <div :class="{ 'thumb': true, 'placeholder': !record.preview }">
-            <img :src="record.preview || placeholderImage(record.index)" />
+                <img :src="record.preview || placeholderImage(record.index)" @click="() => router.push(`/recipe/${record.slug}`)" />
         </div>
         
         <header>

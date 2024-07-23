@@ -12,7 +12,7 @@ const store = useRegistryStore();
         
         <div class="top">
             <div class="logo">
-                <RecipeIcon width="75" height="75" />
+                <RecipeIcon class="app-icon" />
                 <h1 class="green">Rezepte</h1>
             </div>
             <div class="searchbar">
@@ -50,8 +50,24 @@ header {
         grid-template-columns: 9rem auto;
     }
 
+    @media (max-width: 650px) {
+        grid-template-columns: 8rem auto;
+    }
+
 
     .logo {
+
+        .app-icon {
+            transition: max-width .5s, max-height .5s;
+            max-width: 75px;
+            max-height: 75px;
+
+            @media (max-width: 650px) {
+                max-width: 60px;
+                max-height: 60px;
+            }
+        }
+
         cursor: pointer;
         display: block;
         position: relative;
@@ -76,10 +92,15 @@ header {
             font-size: 2.4em;
             transform: rotate(-25deg);
             
-            transition: left .5s, transform 2.5s;
+            transition: left .5s, transform 2.5s, font-size .5s;
 
             @media (max-width: 800px) {
                 left: -.9em;
+            }
+
+            @media (max-width: 650px) {
+                font-size: 1.75em;
+                left: -.85em;
             }
         }
     }
@@ -114,7 +135,7 @@ nav {
     margin: 0.5rem 0;
 
     @media (max-width: 650px) {
-        font-size: 0.75em;
+        font-size: 0.85em;
     }
 
     a.router-link-exact-active {
