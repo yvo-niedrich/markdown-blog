@@ -48,10 +48,12 @@ div.recipe {
     
     @media (max-width: 800px) {
         padding: 1em 1.5em;
+        margin: 1em 0.75em;
     }
     
     @media (max-width: 650px) {
         padding: 1em .5;
+        margin: 1em 0.5em;
     }
     
     @media print {    
@@ -65,12 +67,19 @@ div.recipe {
         text-decoration: none;
         font-size: 2em;
         line-height: 2em;
+        font-weight: bold;
     }
     
     h2 {
         font-size: 1.5em;
+        font-weight: bold;
         line-height: 1.5em;
         margin: .4em 0;
+    }
+    
+    h3 {
+        margin: .4em 0;
+        font-weight: bold;
     }
     
     img:first-of-type {
@@ -97,9 +106,9 @@ div.recipe {
                 max-width: 18em;
             }
             
-            @media (max-width: 450px) {
+            @media (max-width: 480px) {
+                max-width: 95%;
                 float: none;
-                max-width: none;
             }
         }
     }

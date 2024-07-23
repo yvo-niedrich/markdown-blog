@@ -13,7 +13,6 @@ const args = arg({
     '--base': String,
     '--publicFolder': String,
 	'--documentPath': String,
-	'--imagePath': String,
 	'--indexFile': String,
 	'--registryFile': String,
 
@@ -46,15 +45,14 @@ function resolvePath(p, from = null) {
 const applicationBasePath = args['--base'] || '';
 const publicPath = path.posix.resolve(args['--publicFolder'] || './public');
 const documentRootDirectory = path.posix.resolve(publicPath, args['--documentPath'] || 'documents');
-const imageRootDirectory = path.posix.resolve(publicPath, args['--imagePath'] || 'images');
 const indexPath = path.posix.resolve(publicPath, args['--indexFile'] || 'searchindex.json');
 const registryPath = path.posix.resolve(publicPath, args['--registryFile'] || 'registry.json');
-const maxKeywordsPerFile = args['--maxKeywordsPerFile'] || 45;
+const maxKeywordsPerFile = args['--maxKeywordsPerFile'] || 30;
 
 const excludeTokens = [
     'Zutaten', 'Anweisungen', 'Ingredients', 'Instructions', 'zugeben', 'hinzugeben', 'vermischen', 'streichen', 'Backofen',
     'vegetarisch', 'Minuten', 'geben', 'schneiden', 'hacken', 'gross', 'verarbeiten', 'anschließend', 'dann', 'danach', 'rühren',
-    'mahlen', 'einen', 'alternative'
+    'mahlen', 'einen', 'alternative', 'verrühren', 'nicht', 'schnell', 'Mischung', 'rot', 'gelb', 'dazugeben',
 ];
 
 const specialCharMap = {
@@ -143,7 +141,7 @@ function getFilesFromDirectory(directoryPath) {
 }
 
 function readFileContent(filePath) {
-    return fs.readFileSync(filePath, 'utf-8');
+    return fs.readFileSync(filePath, 'utf-8').replace(/(?:\r\n|\r|\n)/g, "\n");;
 }
 
 function UrlRelativeFromPublic(filePath) {
@@ -160,7 +158,7 @@ function UrlRelativeFromPublic(filePath) {
     return (applicationBasePath + filePath).replaceAll(/(\/){2,}/g, '/');
 }
 
-const markdownImageLink = /!\[(?:[^\]]*)\]\(([^\)]+)\)/gm;
+const markdownImageLink = /\!\[(?:[^\]]*)\]\(([^\)]*)\)/gm;
 function buildRegistry(files) {
     const registry = [];
     files.forEach(file => {
@@ -170,8 +168,8 @@ function buildRegistry(files) {
             .substring(1)
             .trim();
         
-        const images = markdownImageLink.exec(content);
-        const preview = resolvePath(images && images[1], file);
+        const previewImageMarkdown = content.match(markdownImageLink);
+        const preview = resolvePath(previewImageMarkdown && previewImageMarkdown[0].split(/[\(\)]/)[1], file);
 
         registry.push({
             name,
@@ -202,20 +200,20 @@ function normalizeTokens(tokens) {
 const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText));
 
 function extractKeywords(text, max = Infinity) {
-    const normalizedText = normalizeText(text);
+    const normalizedText = normalizeText(text).replaceAll(markdownImageLink, '');
     const tokens = tokenizer.tokenize(normalizedText);
     const filteredTokens = filterTokens(tokens);
     const normalizedTokens = normalizeTokens(filteredTokens);
     const frequency = {};
     normalizedTokens
         .filter(token => !normalizedExcludes.includes(token))
-        .forEach(token => {
+        .forEach((token, idx) => {
             const lowerCaseToken = token.toLowerCase();
             const value = Math.ceil(lowerCaseToken.length * 0.25)
             if (frequency[lowerCaseToken]) {
                 frequency[lowerCaseToken]+=value;
             } else {
-                frequency[lowerCaseToken] = value;
+                frequency[lowerCaseToken] = value  + Math.max(Math.ceil((20 - idx) / 5), 0);
             }
         });
     return Object.keys(frequency)
@@ -228,7 +226,7 @@ function buildIndex(files, maxKeywordsPerFile = Infinity) {
     const index = {};
 
     files.forEach(file => {
-        const content = readFileContent(file);
+        const content = readFileContent(file).replaceAll(markdownImageLink, '');
         const keywords = extractKeywords(content, maxKeywordsPerFile);
         index[UrlRelativeFromPublic(file)] = keywords;
     });
@@ -257,5 +255,5 @@ fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2));
 
 
 const searchIndex = buildIndex(fileList, maxKeywordsPerFile);
-const reverseSearchIndex = reverseIndex(searchIndex, Math.round(fileList.length * 0.75));
+const reverseSearchIndex = reverseIndex(searchIndex, Math.round(fileList.length * 0.8));
 fs.writeFileSync(indexPath, JSON.stringify(reverseSearchIndex, null, 2));

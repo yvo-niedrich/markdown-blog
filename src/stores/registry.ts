@@ -9,8 +9,10 @@ export const useRegistryStore = defineStore('registry', () => {
     fetch(registryPath)
         .then(rsp => rsp.json())
         .then(rsp => {
-            registry.value = rsp.map((record: any) => {
-                record.modified = new Date(record.modified);
+            registry.value = rsp.map((record: RecipeRegistryRecord, idx: number) => {
+                record.modified = new Date(record.modified as any);
+                record.preview = record.preview;
+                record.index = idx;
                 return record;
             });
         });

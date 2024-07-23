@@ -1,7 +1,5 @@
 # Brownie
 
-![Brownies](../../images/bownie.png)
-
 ## Zutaten
 
 - 500 g Butter

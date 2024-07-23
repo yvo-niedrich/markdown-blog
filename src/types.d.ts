@@ -10,6 +10,7 @@ type RecipeRegistryRecord = {
     path: string;
     category: string;
     modified: Date;
+    index: number;
 };
 
 type Registry = { [key: string]: RecipeRegistryRecord };
