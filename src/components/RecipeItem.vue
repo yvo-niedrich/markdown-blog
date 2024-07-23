@@ -37,6 +37,16 @@ function placeholderImage(index: number) {
     
     display: grid;
     grid-template-columns: 10rem auto 6rem;
+        
+    @media (max-width: 800px) {
+        grid-template-columns: 10rem auto 2rem;
+        padding: .75em;
+    }
+    
+    @media (max-width: 650px) {
+        grid-template-columns: 8rem auto;
+        padding: .65em;
+    }
     
     &:hover {
         border: 1px solid var(--color-border-hover);
@@ -46,9 +56,13 @@ function placeholderImage(index: number) {
 
 .thumb {
     height: 6rem;
-    width: 9rem;
+    width: 9.5rem;
     text-align: center;
     user-select: none;
+
+    @media (max-width: 650px) {
+        width: 7.5rem;
+    }
     
     &.placeholder img {
         opacity: .75;
@@ -59,7 +73,7 @@ function placeholderImage(index: number) {
     img {
         max-width: 100%;
         max-height: 100%;
-        border-radius: 1rem;
+        border-radius: 1em;
         
         border: 1px solid var(--color-border-hover);
     }
