@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue';
 import {useRegistryStore} from '@/stores/registry';
+import title from '@/helper/title';
 
 const props = defineProps<{ slug: string }>();
 const content = ref('## Loading...');
@@ -11,6 +12,7 @@ const { registry } = storeToRefs(useRegistryStore());
 
 watch(registry, async(registry) => {
     const recipe = registry.find(r => r?.slug == props?.slug);
+    title(recipe?.name || "Lade");
     if (!recipe?.path) return;
     content.value = await fetch(recipe?.path).then(response => response.text());
     source.value = recipe.path;

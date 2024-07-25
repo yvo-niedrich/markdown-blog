@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router'
 import { debounce } from '@/helper/events';
-import { ref, watch } from 'vue';
+import { ref, watch, nextTick } from 'vue';
 
 const router = useRouter();
 const query = ref('');
 
 const search = debounce(function() {
     if (query.value.length > 2) router.push('/search/' + encodeURIComponent(query.value));
+    
 }, 300);
 
 watch(query, search);

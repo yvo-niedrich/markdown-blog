@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRegistryStore } from '@/stores/registry';
 import { useIndexStore } from '@/stores/index';
 import RecipeItem from '@/components/RecipeItem.vue';
 import {tokenize} from '@/helper/tokens';
+import title from '@/helper/title';
 import removeUndefined from '@/helper/removeUndefined';
 
 const props = defineProps<{ query: string }>();
@@ -15,6 +16,7 @@ const registryStore = useRegistryStore();
 
 const {index} = storeToRefs(indexStore);
 const {registry} = storeToRefs(registryStore);
+watch(props, (p) => title("«" + p.query.trim() + "»"), {immediate: true});
 
 watch([registry, index, props], async([registry, index]) => {
     const paths: { [path: string]: number} = {};

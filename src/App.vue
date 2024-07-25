@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import RecipeIcon from './components/icons/IconRecipe.vue'
 import SearchbarComponent from '@/components/Searchbar.vue'
 import {useRegistryStore} from './stores/registry';
 
+const router = useRouter();
 const store = useRegistryStore();
 </script>
 
@@ -11,7 +12,7 @@ const store = useRegistryStore();
     <header class="no-print">
         
         <div class="top">
-            <div class="logo">
+            <div class="logo" @click="() => router.push('/')">
                 <RecipeIcon class="app-icon" />
                 <h1 class="green">Rezepte</h1>
             </div>
@@ -46,6 +47,7 @@ header {
     grid-template-columns: 14rem auto;
     margin-bottom: 0 auto 1em;
     transition: grid-template-columns .5s;
+
     @media (max-width: 800px) {
         grid-template-columns: 9rem auto;
     }
@@ -54,8 +56,12 @@ header {
         grid-template-columns: 8rem auto;
     }
 
-
     .logo {
+        cursor: pointer;
+        display: block;
+        position: relative;
+        margin: 0 2rem;
+        text-align: center;
 
         .app-icon {
             transition: max-width .5s, max-height .5s;
@@ -67,12 +73,6 @@ header {
                 max-height: 60px;
             }
         }
-
-        cursor: pointer;
-        display: block;
-        position: relative;
-        margin: 0 2rem;
-        text-align: center;
          
         &:active h1,
         &:hover h1 {
