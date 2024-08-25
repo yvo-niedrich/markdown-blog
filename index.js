@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import unorm from 'unorm';
 import natural from 'natural';
-import stopword from 'stopword';
+import stopword, { ind } from 'stopword';
 import arg from 'arg';
 
 const args = arg({
@@ -18,10 +18,12 @@ const args = arg({
 
     
 	'--maxKeywordsPerFile': Number,
+	'--maxKeywordsAverage': Number,
 
 	// Aliases
 	'-v': '--verbose',
 	'-m': '--maxKeywordsPerFile',
+	'-a': '--maxKeywordsAverage',
 });
 
 
@@ -47,7 +49,8 @@ const publicPath = path.posix.resolve(args['--publicFolder'] || './public');
 const documentRootDirectory = path.posix.resolve(publicPath, args['--documentPath'] || 'documents');
 const indexPath = path.posix.resolve(publicPath, args['--indexFile'] || 'searchindex.json');
 const registryPath = path.posix.resolve(publicPath, args['--registryFile'] || 'registry.json');
-const maxKeywordsPerFile = args['--maxKeywordsPerFile'] || 30;
+const maxKeywordsPerFile = args['--maxKeywordsPerFile'] || 125;
+const maxKeywordsAverage = args['--maxKeywordsAverage'] || 50;
 
 const excludeTokens = [
     'Zutaten', 'Anweisungen', 'Ingredients', 'Instructions', 'zugeben', 'hinzugeben', 'vermischen', 'streichen', 'Backofen',
@@ -199,12 +202,23 @@ function normalizeTokens(tokens) {
 
 const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText));
 
-function extractKeywords(text, max = Infinity) {
+function extractKeywordsWithFrequency(text, max = Infinity) {
     const normalizedText = normalizeText(text).replaceAll(markdownImageLink, '');
-    const tokens = tokenizer.tokenize(normalizedText);
+    const frequency = {}; 
+    
+    // Inject Recipe Name
+    (text.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
+        .substring(1)
+        .trim().split(/\s+/)
+        .map(token => token.trim())
+        .filter(token => token && token.length >= 3)
+        .filter(token => !normalizedExcludes.includes(token))
+        .forEach(token => frequency[token.toLowerCase()] = 10);
+
+    const tokens = tokenizer.tokenize(normalizedText).map(token => token.trim().replace(/-+$/, ''));
     const filteredTokens = filterTokens(tokens);
     const normalizedTokens = normalizeTokens(filteredTokens);
-    const frequency = {};
+
     normalizedTokens
         .filter(token => !normalizedExcludes.includes(token))
         .forEach((token, idx) => {
@@ -219,7 +233,11 @@ function extractKeywords(text, max = Infinity) {
     return Object.keys(frequency)
         .filter(k => frequency[k] > 1)
         .sort((a, b) => frequency[b] - frequency[a])
-        .slice(0, max);
+        .slice(0, max)
+        .reduce(function (acc, key) { 
+            acc[key] = frequency[key];
+            return acc;
+        }, {});
 }
 
 function buildIndex(files, maxKeywordsPerFile = Infinity) {
@@ -227,25 +245,32 @@ function buildIndex(files, maxKeywordsPerFile = Infinity) {
 
     files.forEach(file => {
         const content = readFileContent(file).replaceAll(markdownImageLink, '');
-        const keywords = extractKeywords(content, maxKeywordsPerFile);
-        index[UrlRelativeFromPublic(file)] = keywords;
+        const keywordFrequency = extractKeywordsWithFrequency(content, maxKeywordsPerFile);
+        index[UrlRelativeFromPublic(file)] = keywordFrequency;
     });
 
     return index;
 }
 
-function reverseIndex(index, skipSizeGreaterThan) {
+function reverseIndex(index, skipSizeGreaterThan, maxKeywords) {
     const reverseIndex = {};
+    const frequency = {};
     Object.keys(index)
         .forEach(file => {
-            index[file].forEach(idx => {
+            Object.keys(index[file]).forEach((idx, num) => {
                 if (!reverseIndex[idx]) reverseIndex[idx] = [];
                 reverseIndex[idx].push(file);
+
+                if (!frequency[idx]) frequency[idx] = 0;
+                frequency[idx] = Math.max(frequency[idx], Math.min(1, index[file][idx] / Math.ceil(num / 5)));
             });
         });
 
-    return Object.keys(reverseIndex)
+    return Object.keys(frequency)
         .filter( key => reverseIndex[key].length <= skipSizeGreaterThan )
+        .sort((a, b) => frequency[b] - frequency[a])
+        .slice(0, maxKeywords)
+        .sort()
         .reduce( (res, key) => Object.assign(res, { [key]: reverseIndex[key] }), {} );
 }
 
@@ -255,5 +280,5 @@ fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2));
 
 
 const searchIndex = buildIndex(fileList, maxKeywordsPerFile);
-const reverseSearchIndex = reverseIndex(searchIndex, Math.round(fileList.length * 0.8));
+const reverseSearchIndex = reverseIndex(searchIndex, Math.round(fileList.length * 0.8), maxKeywordsAverage * fileList.length);
 fs.writeFileSync(indexPath, JSON.stringify(reverseSearchIndex, null, 2));
