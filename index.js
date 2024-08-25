@@ -53,9 +53,10 @@ const maxKeywordsPerFile = args['--maxKeywordsPerFile'] || 125;
 const maxKeywordsAverage = args['--maxKeywordsAverage'] || 50;
 
 const excludeTokens = [
-    'Zutaten', 'Anweisungen', 'Ingredients', 'Instructions', 'zugeben', 'hinzugeben', 'vermischen', 'streichen', 'Backofen',
-    'vegetarisch', 'Minuten', 'geben', 'schneiden', 'hacken', 'gross', 'verarbeiten', 'anschließend', 'dann', 'danach', 'rühren',
-    'mahlen', 'einen', 'alternative', 'verrühren', 'nicht', 'schnell', 'Mischung', 'rot', 'gelb', 'dazugeben',
+    'Zutaten', 'Anweisungen', 'Zubereitung', 'Ingredients', 'Instructions', 'Gramm', 'Kilo', 'zugeben', 'hinzugeben', 'vermischen', 
+    'streichen', 'Backofen','vegetarisch', 'Minuten', 'geben', 'schneiden', 'hacken', 'gross', 'verarbeiten', 'anschließend', 'dann',
+    'danach', 'rühren','mahlen', 'einen', 'alternative', 'verrühren', 'nicht', 'schnell', 'Mischung', 'rot', 'gelb', 'dazugeben',
+    'falsch', 'Ofen', 'vorwärmen', 'erhitzen', 'kochen', 'köcheln', 'vorsichtig', 'Bedarf', 'gehackt', 'geschnitten', 'gemahlen', 'klein'
 ];
 
 const specialCharMap = {

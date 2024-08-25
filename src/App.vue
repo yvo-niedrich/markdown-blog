@@ -6,6 +6,8 @@ import {useRegistryStore} from './stores/registry';
 
 const router = useRouter();
 const store = useRegistryStore();
+
+console.log(import.meta.env)
 </script>
 
 <template>

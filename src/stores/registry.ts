@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-const registryPath = import.meta.env.BASE_URL + '/registry.json';
+const registryPath = import.meta.env.BASE_URL.concat('/registry.json?hash=', BUILD_HASH);
 
 export const useRegistryStore = defineStore('registry', () => {
     const registry = ref<RecipeRegistryRecord[]>([]);
