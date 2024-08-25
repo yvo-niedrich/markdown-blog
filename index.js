@@ -56,7 +56,8 @@ const excludeTokens = [
     'Zutaten', 'Anweisungen', 'Zubereitung', 'Ingredients', 'Instructions', 'Gramm', 'Kilo', 'zugeben', 'hinzugeben', 'vermischen', 
     'streichen', 'Backofen','vegetarisch', 'Minuten', 'geben', 'schneiden', 'hacken', 'gross', 'verarbeiten', 'anschließend', 'dann',
     'danach', 'rühren','mahlen', 'einen', 'alternative', 'verrühren', 'nicht', 'schnell', 'Mischung', 'rot', 'gelb', 'dazugeben',
-    'falsch', 'Ofen', 'vorwärmen', 'erhitzen', 'kochen', 'köcheln', 'vorsichtig', 'Bedarf', 'gehackt', 'geschnitten', 'gemahlen', 'klein'
+    'falsch', 'Ofen', 'vorwärmen', 'erhitzen', 'kochen', 'köcheln', 'vorsichtig', 'Bedarf', 'gehackt', 'geschnitten', 'gemahlen', 'klein',
+    'Serviervorschlag', 'Tasse',
 ];
 
 const specialCharMap = {
@@ -193,15 +194,15 @@ function normalizeText(text) {
 }
 
 function filterTokens(tokens) {
-    tokens = stopword.removeStopwords(tokens, stopword.de)
-    return tokens.filter(t => !/^\d/.test(t) && t.length > 4);
 }
 
-function normalizeTokens(tokens) {
-    return tokens.map(token => stemmer(token));
+function normalizeTokens(tokens, filter = true) {
+    return stopword.removeStopwords(tokens.map(token => token.trim().replace(/\([nse]\)$/).replace(/-+$/, '')), stopword.de)
+        .filter(t => !/^\d/.test(t) && t.length > 4)
+        .map(token => stemmer(token));
 }
 
-const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText));
+const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText), false);
 
 function extractKeywordsWithFrequency(text, max = Infinity) {
     const normalizedText = normalizeText(text).replaceAll(markdownImageLink, '');
@@ -216,11 +217,7 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
         .filter(token => !normalizedExcludes.includes(token))
         .forEach(token => frequency[token.toLowerCase()] = 10);
 
-    const tokens = tokenizer.tokenize(normalizedText).map(token => token.trim().replace(/-+$/, ''));
-    const filteredTokens = filterTokens(tokens);
-    const normalizedTokens = normalizeTokens(filteredTokens);
-
-    normalizedTokens
+    normalizeTokens(tokenizer.tokenize(normalizedText))
         .filter(token => !normalizedExcludes.includes(token))
         .forEach((token, idx) => {
             const lowerCaseToken = token.toLowerCase();
@@ -231,6 +228,7 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
                 frequency[lowerCaseToken] = value  + Math.max(Math.ceil((20 - idx) / 5), 0);
             }
         });
+
     return Object.keys(frequency)
         .filter(k => frequency[k] > 1)
         .sort((a, b) => frequency[b] - frequency[a])

@@ -6,16 +6,12 @@ import type { RenderRule } from "markdown-it/lib/renderer.mjs";
 defineProps({ source: { type: String, default: ""}, content: { type: String, default: ""}});
 
 function renderFile(file: string, content: string) {
-
     const markdown = new MarkdownIt();
     const defaultImageRenderer = markdown.renderer.rules.image as RenderRule;
     markdown.renderer.rules.image = (tokens, idx, options, env, self) => {
         const src = tokens[idx].attrGet('src')
         if (src && !src.startsWith('/')) {
             const newPath = resolvePath(src, file.replace(/\/([^\/])+\.md/i, ''));
-
-            console.log(src, file, newPath);
-
             tokens[idx].attrSet('src', newPath)
         }
         
