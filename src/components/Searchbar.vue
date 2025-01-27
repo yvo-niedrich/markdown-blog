@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router'
 import { debounce } from '@/helper/events';
-import { ref, watch, nextTick } from 'vue';
+import { ref, watch } from 'vue';
 
 const router = useRouter();
 const query = ref('');
 
-const search = debounce(function() {
+const search = debounce(function(...args) {
+    console.log(args);
     if (query.value.length > 2) router.push('/search/' + encodeURIComponent(query.value));
-    
+    if (query.value.length === 0) router.push('/');
 }, 300);
+
+const keydownFn = function(event: KeyboardEvent) {
+    if (event.key === 'Escape') query.value = '';
+}
 
 watch(query, search);
 
@@ -23,7 +28,7 @@ watch(query, search);
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
             </svg>
         </div>
-        <input type="search" v-model="query" @focus="search" placeholder="Search..." />
+        <input type="search" v-model="query" @focus="search" @keydown="keydownFn" placeholder="Search..." />
     </div>
     
 </template>
@@ -95,10 +100,6 @@ watch(query, search);
         @media (max-width: 800px) {
             padding: 0.75em 0.75em 0.75em 2em;
         }
-        
-        // @media (max-width: 650px) {
-        //     width: 100%;
-        // }
     }
 }
 

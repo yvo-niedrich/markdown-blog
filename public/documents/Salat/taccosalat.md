@@ -13,7 +13,7 @@
 
 ## Anweisungen
 
-1. Hackfleisch in Pfanne anbraten, mit Salz+Pfeffer würzen. Hälfte des Tacco-Seasoning-Mix-Pulvers mit 2-3 EL Wasser aufrühren und unter heben. Anschließend Hackfleisch abkühlen lassen
+1. Hackfleisch in Pfanne anbraten, mit Salz+Pfeffer würzen. Hälfte des Tacco-Seasoning-Mix Pulvers mit 2-3 EL Wasser aufrühren und unter heben. Anschließend Hackfleisch abkühlen lassen
 2. Eisbergsalat halbieren und in Streifen schneiden. 
 3. Tomaten und Paprika klein schneiden und zu Eisbergsalat in Schüssel geben.
 4. Käse und erkaltetes Hackfleisch dazu.
@@ -21,4 +21,4 @@
 
 
 ### Soße
-Milch, French Dressing und Mayonnaise zusammen mit restl. Tacco-Seasoning-Mix-Pulver (ohne extra Wasser!) verrühren.
+Milch, French Dressing und Mayonnaise zusammen mit restl. Tacco-Seasoning-Mix Pulver (ohne extra Wasser!) verrühren.
