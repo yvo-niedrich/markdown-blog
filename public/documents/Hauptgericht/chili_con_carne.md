@@ -21,11 +21,10 @@
 
 ## Anweisungen
 
-1. Zwiebeln und Knoblauch in den Mixtopf geben und 5 sek. / Stufe 5. <br />
-   Evtl. Mit dem Spatel herunterschieben und weitere 5 sek./ Stufe 5.
+1. Zwiebeln und Knoblauch in den Mixtopf geben und 5 sek. / Stufe 5 und mit dem Spatel herunterschieben.
 2. Öl hinzufügen und 2:30 Minuten / Varoma / Stufe 1.
 3. Hackfleisch hinzugeben, 1/2 gewürfelte Paprika hinzugeben mit Salz, Pfeffer, Paprika ordentlich würzen und 10 Minuten / 100 Grad / Linkslauf + Stufe 0.
 4. Dann Wasser, Brühwürfel, passierte Tomaten, Tomatenmark, Bohnen und Mais hinzufügen und mit Chilipulver und/oder Chilischote nachwürzen. 
 5. 5 Minuten/ 100 Grad / Linkslauf + Stufe 0 aufkochen.
-6. Nochmal abschmecken und weitere 10-15 Minuten / 100 Grad / Linkslauf + Stufe 0 köcheln lassen.
+6. Nochmal abschmecken und weitere 10-15 Minuten / 100°C / Linkslauf + Stufe 0 köcheln lassen.
 

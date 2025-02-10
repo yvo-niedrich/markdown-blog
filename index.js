@@ -57,7 +57,7 @@ const excludeTokens = [
     'streichen', 'Backofen','vegetarisch', 'Minuten', 'geben', 'schneiden', 'hacken', 'gross', 'verarbeiten', 'anschließend', 'dann',
     'danach', 'rühren','mahlen', 'einen', 'alternative', 'verrühren', 'nicht', 'schnell', 'Mischung', 'rot', 'gelb', 'dazugeben',
     'falsch', 'Ofen', 'vorwärmen', 'erhitzen', 'kochen', 'köcheln', 'vorsichtig', 'Bedarf', 'gehackt', 'geschnitten', 'gemahlen', 'klein',
-    'Serviervorschlag', 'Tasse', 'Zwischenzeit', 'Pack', 'Packung',
+    'Serviervorschlag', 'Tasse', 'Zwischenzeit', 'Pack', 'Packung', 'Dose', 'Linkslauf', 'Stufe'
 ];
 
 const specialCharMap = {
