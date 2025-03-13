@@ -178,7 +178,7 @@ function buildRegistry(files) {
 
         registry.push({
             name,
-            'slug': name.replace(/([\W]+)/g, '-').substring(0, 25).toLowerCase(),
+            'slug': normalizeUmlauts(name).replace(/([\W]+)/g, '-').substring(0, 30).toLowerCase(),
             'path': UrlRelativeFromPublic(file),
             'preview': UrlRelativeFromPublic(preview),
             'category': file.substring(documentRootDirectory.length + 1).replace(/\/([^\/])+\.md/i, ''),
@@ -188,12 +188,12 @@ function buildRegistry(files) {
     return registry;
 }
 
-function normalizeText(text) {
-    text = text.replace(/[ßäöüÄÖÜ]/g, match => specialCharMap[match]);
-    return unorm.nfkd(text).replace(/[\u0300-\u036f]/g, '');
+function normalizeUmlauts(text) {
+    return text.replace(/[ßäöüÄÖÜ]/g, match => specialCharMap[match]);
 }
 
-function filterTokens(tokens) {
+function normalizeText(text) {
+    return unorm.nfkd(normalizeUmlauts(text)).replace(/[\u0300-\u036f]/g, '');
 }
 
 function normalizeTokens(tokens, filter = true) {
