@@ -47,7 +47,7 @@ Für 4 Gläser (a´500 ml)
 
 11. Danach gilt bei
     - GEMÜSE: Ofen auf 150 Grad Umlauft zurückdrehen und für weitere 90 Minuten einkochen. Danach Ofen ausstellen und Gläser für weitere 30 Minuten darin satehen lassen.
-    - FRÜCHTEN: Often ausschalten und weitere 30 Minuten im heißen Often stehen lassen.
+    - FRÜCHTE: Ofen ausschalten und weitere 30 Minuten im heißen Ofen stehen lassen.
 
 12. Gläser herausnehmen und auskühlen lassen,  danach erst die Klammern entfernen. (Vielleicht sogar einfrieren?!)
 
