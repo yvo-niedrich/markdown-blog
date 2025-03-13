@@ -24,14 +24,15 @@ Für 4 Gläser (a´500 ml)
 3. Essig und Zucker in einen Topf geben und erwärmen, bis sich der Zucker aufgelöst hat. Die Gewürze in ein Mullsäckchen oder Tee-Ei füllen, in den Topf geben, die Mischung zum Kochen bringen und 5 Minuten kochen lassen. Die Orangen dazugeben und zugedeckt weitere 20 Minuten köcheln lassen. Die Gläser sterilisieren.
 
 4. Die Orangenscheiben mit einer Schaumkelle aus dem Sirup nehmen und in die vorbereiteten Gläser schichten. Das Gewürzsäckchen entnehmen, den heißen Sirup über die Orangen gießen und die Gläser verschließen. An einem kühlen Ort 4 Wochen durchziehen lassen.
-
-5. Zum Einfüllen, das **Glas auf ein feuchtes Tuch** stellen, damit es durch das Einfüllen des heißen Kochgutes nicht platzt.
    
    >**WECKGläser**, Gummiringe und Deckel vorbereiten:
    >
    >    Saubere und staubfreie Gläser mit kochendem Wasser (Wasserkocher) spülen und Gummiringe im Wasser liegen lassen. 
    >
    >    Wenn du neue Weckgläser verwendest, dann spüle diese mit sehr heißem Wasser und etwas Spülmittel aus oder stelle sie für einen Durchgang in die Spülmaschine. Die **Gummiringe** werden vor Verwendung ebenfalls mit kochend heißem Wasser und einem Spritzer **Essig** übergossen und bleiben dort zwei bis drei Minuten liegen. Anschließend in heißes Wasser (ohne Essig) geben und dort bis zur Verwendung liegen lassen.
+
+5. Zum Einfüllen, das **Glas auf ein feuchtes Tuch** stellen, damit es durch das Einfüllen des heißen Kochgutes nicht platzt.
+
 6. Einzukochendes einfüllen, etwa ein Fingerbreit Platz zum obersten Rand lassen.
 
 7. Mit Gummis bestückte Deckel auf die Gläser legen und mit den Klammern verschließen.
