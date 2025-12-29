@@ -43,4 +43,3 @@
 - **Zubereitungszeit:** ca. **30 Minuten** (plus Kochzeit)  
 - **Haltbarkeit:** ca. **10 Monate** (ungeöffnet)
 
-**Viel Spaß beim Nachmachen!**

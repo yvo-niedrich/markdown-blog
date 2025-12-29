@@ -1,6 +1,6 @@
 # Linsen Dal
 
-![alt text](../../images/rotelinsendal.jpg)
+![](../../images/rotelinsendal.jpg)
 
 ## Zutaten
 
