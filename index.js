@@ -62,7 +62,7 @@ const excludeTokens = [
     'Servieren', 'Serviertipp', 'optional', 'jeweils', 'beides', 'weiteren', 'weiteres', 'Zubereitungszeit', 'Portionen', 'Portion',
     'Personen', 'Person', 'Backform', 'Durchmesser', 'Hälfte', 'Hälften', 'verwenden', 'benötigt', 'benötigen', 'benötigst',
     'Schüssel',  'Pfanne', 'Topf', 'Mixer',  'Küchenmaschine',  'Zerkleinerer', 'geben.', 'fügen', 'hinzugefügt', 'möglichst',
-    'Wasser', 'Öl', 'Butter', 'Salz', 'Pfeffer', 'Zucker', 'Mehl', 'Dosen', 'Gläsern', 'Packungen'
+    'Wasser', 'Öl', 'Butter', 'Salz', 'Pfeffer', 'Zucker', 'Mehl', 'Dosen',
 ];
 
 const specialCharMap = {
