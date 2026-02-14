@@ -1,9 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import unorm from 'unorm';
-import natural from 'natural';
-import stopword, { ind } from 'stopword';
 import arg from 'arg';
+
+import {
+    resolvePath,
+    getFilesFromDirectory,
+    readFileContent,
+    UrlRelativeFromPublic,
+    normalizeUmlauts,
+    normalizeText,
+    stripFrontmatter,
+    parseFrontmatter,
+    tokenizer,
+    normalizeTokens,
+    markdownImageLink
+} from './lib/helpers.js';
 
 const args = arg({
 	// Types
@@ -26,25 +37,41 @@ const args = arg({
 	'-a': '--maxKeywordsAverage',
 });
 
-
-
-function resolvePath(p, from = null) {
-    if (!p || p.startsWith('/')) {
-        return p;
-    }
-
-    if (from === null) {
-        from = publicPath || '.';
-    }
-
-    if (!fs.lstatSync(from).isDirectory()) {
-        from = path.posix.dirname(from) + "/";
-    }
-
-    return path.posix.resolve(from, p);
+function ensureLeadingTrailing(p) {
+    if (!p) return '';
+    if (!p.startsWith('/')) p = '/' + p;
+    if (!p.endsWith('/')) p = p + '/';
+    return p;
 }
 
-const applicationBasePath = args['--base'] || '';
+function detectBase() {
+    // CLI override wins
+    if (args['--base']) return ensureLeadingTrailing(args['--base']);
+
+    // Try reading vite.config.ts for the base setting
+    try {
+        const viteConfigPath = path.posix.resolve('./vite.config.ts');
+        if (fs.existsSync(viteConfigPath)) {
+            const viteCfg = fs.readFileSync(viteConfigPath, 'utf8');
+            const m = viteCfg.match(/base\s*:\s*['"`]([^'"`]+)['"`]/);
+            if (m && m[1]) return ensureLeadingTrailing(m[1]);
+        }
+    } catch (e) {
+        // ignore
+    }
+
+    // Try package.json homepage
+    try {
+        const pkg = JSON.parse(fs.readFileSync(path.posix.resolve('./package.json'), 'utf8'));
+        if (pkg && pkg.homepage) return ensureLeadingTrailing(pkg.homepage);
+    } catch (e) {
+        // ignore
+    }
+
+    return '';
+}
+
+const applicationBasePath = detectBase();
 const publicPath = path.posix.resolve(args['--publicFolder'] || './public');
 const documentRootDirectory = path.posix.resolve(publicPath, args['--documentPath'] || 'documents');
 const indexPath = path.posix.resolve(publicPath, args['--indexFile'] || 'searchindex.json');
@@ -65,156 +92,43 @@ const excludeTokens = [
     'Wasser', 'Öl', 'Butter', 'Salz', 'Pfeffer', 'Zucker', 'Mehl', 'Dosen',
 ];
 
-const specialCharMap = {
-    'ß': 'ss',
-    'ä': 'ae',
-    'ö': 'oe',
-    'ü': 'ue',
-    'Ä': 'Ae',
-    'Ö': 'Oe',
-    'Ü': 'Ue'
-};
 
-const tokenizer = new natural.AggressiveTokenizerDe();
-const stemmer = (function() {
-    function replaceSpecialChars(text) {
-        const specialCharMap = {
-            'ß': 'ss',
-            'ä': 'ae',
-            'ö': 'oe',
-            'ü': 'ue',
-            'Ä': 'Ae',
-            'Ö': 'Oe',
-            'Ü': 'Ue'
-        };
-        return text.replace(/[ßäöüÄÖÜ]/g, match => (specialCharMap[match]));
-    }
-    
-    function step1(word) {
-        const suffixes = ['ern', 'er', 'em', 'en', 'es', 'e'];
-        for (const suffix of suffixes) {
-            if (word.endsWith(suffix)) {
-                return word.slice(0, -suffix.length);
-            }
-        }
-        return word;
-    }
-    
-    function step2(word) {
-        const suffixes = ['nd', 'ig', 'isch', 'lich', 'heit', 'keit', 'ung'];
-        for (const suffix of suffixes) {
-            if (word.endsWith(suffix)) {
-                return word.slice(0, -suffix.length);
-            }
-        }
-        return word;
-    }
-    
-    function step3(word) {
-        if (word.endsWith('keit')) {
-            word = word.slice(0, -4);
-            if (word.endsWith('ig') || word.endsWith('lich')) {
-                word = word.slice(0, -2);
-            }
-        } else if (word.endsWith('lich') || word.endsWith('heit')) {
-            word = word.slice(0, -4);
-        } else if (word.endsWith('ung')) {
-            word = word.slice(0, -3);
-        }
-        return word;
-    }
-    
-    return function stemmer(word) {
-        word = replaceSpecialChars(word);
-        word = word.toLowerCase();
-        word = step1(word);
-        word = step2(word);
-        word = step3(word);
-        return word;
-    }
-})();
-
-function getFilesFromDirectory(directoryPath) {
-    const files = [];
-
-    fs.readdirSync(directoryPath)
-        .forEach(function(p) {
-            const fileName = path.join(directoryPath, p);
-            if (fs.lstatSync(fileName).isDirectory()) {
-                getFilesFromDirectory(directoryPath + '/' + p).forEach(f => files.push(f));
-            } else if (path.extname(p) === '.md') {
-                files.push(directoryPath + '/' + p)
-            }
-        });
-    return files
-        .sort((a, b) => fs.lstatSync(b).mtime.getTime() - fs.lstatSync(a).mtime.getTime());
-}
-
-function readFileContent(filePath) {
-    return fs.readFileSync(filePath, 'utf-8').replace(/(?:\r\n|\r|\n)/g, "\n");;
-}
-
-function UrlRelativeFromPublic(filePath) {
-    if (!filePath) return filePath;
-
-    if(!filePath.startsWith('/')) {
-        filePath = resolvePath(filePath);
-    }
-
-    if (filePath.indexOf(publicPath) >= 0) {
-        filePath = filePath.slice(publicPath.length);
-    }
-
-    return (applicationBasePath + filePath).replaceAll(/(\/){2,}/g, '/');
-}
-
-const markdownImageLink = /\!\[(?:[^\]]*)\]\(([^\)]*)\)/gm;
-function buildRegistry(files) {
+export function buildRegistry(files) {
     const registry = [];
     files.forEach(file => {
         const content = readFileContent(file);
         const stats = fs.lstatSync(file);
-        const name = (content.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
-            .substring(1)
-            .trim();
-        
-        const previewImageMarkdown = content.match(markdownImageLink);
-        const preview = resolvePath(previewImageMarkdown && previewImageMarkdown[0].split(/[\(\)]/)[1], file);
+        const frontmatter = parseFrontmatter(content);
+
+        const name = frontmatter.name || '';
+        const categories = frontmatter.categories
+            ? frontmatter.categories.split(',').map(c => c.trim()).filter(c => c)
+            : [];
+        const previewPath = frontmatter.preview ? resolvePath(frontmatter.preview, file, publicPath) : '';
 
         registry.push({
             name,
             'slug': normalizeUmlauts(name).replace(/([\W]+)/g, '-').substring(0, 30).toLowerCase(),
-            'path': UrlRelativeFromPublic(file),
-            'preview': UrlRelativeFromPublic(preview),
-            'category': file.substring(documentRootDirectory.length + 1).replace(/\/([^\/])+\.md/i, ''),
+            'path': UrlRelativeFromPublic(file, publicPath, applicationBasePath, resolvePath),
+            'preview': UrlRelativeFromPublic(previewPath, publicPath, applicationBasePath, resolvePath),
+            'category': categories,
             'modified': stats.mtime,
         });
     });
     return registry;
 }
 
-function normalizeUmlauts(text) {
-    return text.replace(/[ßäöüÄÖÜ]/g, match => specialCharMap[match]);
-}
-
-function normalizeText(text) {
-    return unorm.nfkd(normalizeUmlauts(text)).replace(/[\u0300-\u036f]/g, '');
-}
-
-function normalizeTokens(tokens, filter = true) {
-    return stopword.removeStopwords(tokens.map(token => token.trim().replace(/\([nse]\)$/).replace(/-+$/, '')), stopword.de)
-        .filter(t => !/^\d/.test(t) && t.length > 4)
-        .map(token => stemmer(token));
-}
 
 const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText), false);
 
 function extractKeywordsWithFrequency(text, max = Infinity) {
-    const normalizedText = normalizeText(text).replaceAll(markdownImageLink, '');
+    // Remove frontmatter before any processing
+    const content = stripFrontmatter(text);
+    const normalizedText = normalizeText(content).replaceAll(markdownImageLink, '');
     const frequency = {}; 
     
     // Inject Recipe Name
-    (text.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
+    (content.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
         .substring(1)
         .trim().split(/\s+/)
         .map(token => token.trim())
@@ -244,19 +158,19 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
         }, {});
 }
 
-function buildIndex(files, maxKeywordsPerFile = Infinity) {
+export function buildIndex(files, maxKeywordsPerFile = Infinity) {
     const index = {};
 
     files.forEach(file => {
         const content = readFileContent(file).replaceAll(markdownImageLink, '');
         const keywordFrequency = extractKeywordsWithFrequency(content, maxKeywordsPerFile);
-        index[UrlRelativeFromPublic(file)] = keywordFrequency;
+        index[UrlRelativeFromPublic(file, publicPath, applicationBasePath, resolvePath)] = keywordFrequency;
     });
 
     return index;
 }
 
-function reverseIndex(index, skipSizeGreaterThan, maxKeywords) {
+export function reverseIndex(index, skipSizeGreaterThan, maxKeywords) {
     const reverseIndex = {};
     const frequency = {};
     Object.keys(index)

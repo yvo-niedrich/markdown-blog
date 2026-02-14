@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterLink, useRouter } from 'vue-router'
-defineProps<{
+const props = defineProps<{
     record: RecipeRegistryRecord
 }>();
 
 const router = useRouter();
+const categories = computed(() => Array.isArray(props.record.category) ? props.record.category.join(', ') : props.record.category);
 function placeholderImage(index: number) {
     return import.meta.env.BASE_URL + 'placeholder/placeholder' + (index % 4 + 1) + ".png"
 }
@@ -21,7 +23,7 @@ function placeholderImage(index: number) {
                 <RouterLink :to="`/recipe/${record.slug}`">{{ record.name }}</RouterLink>
             </h3>
             <div class="category">
-                <span class="label">{{$t('category')}}:</span> <span>{{ record.category }}</span>
+                <span class="label">{{$t('category')}}:</span> <span>{{ categories }}</span>
             </div>
         </header>
     </div>

@@ -3,27 +3,47 @@ import resolvePath from "@/helper/resolvePath";
 import MarkdownIt from "markdown-it";
 import type { RenderRule } from "markdown-it/lib/renderer.mjs";
 
-defineProps({ source: { type: String, default: ""}, content: { type: String, default: ""}});
+const props = defineProps({
+    source: { type: String, default: "" },
+    thumb: { type: String, default: "" },
+    content: { type: String, default: "" },
+    ignoreFrontmatter: { type: Boolean, default: true },
+});
+
+function stripFrontmatter(content: string) {
+    if (!content || !props.ignoreFrontmatter) return content;
+    return content.replace(/^\s*(?:---|\+\+\+)[\s\S]*?(?:---|\+\+\+|\.\.\.)\s*/, '');
+}
 
 function renderFile(file: string, content: string) {
+
+    console.log(props.thumb);
+
+    let mdContent = stripFrontmatter(content);
+
     const markdown = new MarkdownIt();
     const defaultImageRenderer = markdown.renderer.rules.image as RenderRule;
     markdown.renderer.rules.image = (tokens, idx, options, env, self) => {
         const src = tokens[idx].attrGet('src')
         if (src && !src.startsWith('/')) {
-            const newPath = resolvePath(src, file.replace(/\/([^\/])+\.md/i, ''));
+            const newPath = resolvePath(src, file.replace(/\/([^\/)]+)\.md/i, ''));
             tokens[idx].attrSet('src', newPath)
         }
         
         return defaultImageRenderer(tokens, idx, options, env, self)
     };
-    return markdown.render(content);
+    return markdown.render(mdContent, {  });
 }
 
 </script>
 
 <template>
-    <div class="recipe" v-html="renderFile(source, content)" />
+    <div class="recipe">
+        <div v-if="thumb" class="recipe-thumb">
+            <img :src="thumb" />
+        </div>
+        <div class="recipe-content" v-html="renderFile(source, content)" />
+    </div>
 </template>
 
 <style lang="scss">
@@ -37,7 +57,45 @@ div.recipe {
     
     font-size: .8rem;
     line-height: 1.25rem;
-    
+
+    div.recipe-thumb {
+        margin-top: 1em;
+        float: right;
+
+        @media (max-width: 480px) {
+            float: none;
+        }
+
+        img {
+            box-shadow: 0 0 1em var(--color-border);
+            border: 1px solid transparent;
+            border-radius: 2em;
+
+            transition: max-width .5s, max-height .5s;
+            max-width: 25em;
+            max-height: 20em;
+
+            @media (max-width: 1024px) {
+                max-width: 24em;
+            }
+            
+            @media (max-width: 800px) {
+                max-width: 20em;
+                max-height: 18em;
+            }
+            
+            @media (max-width: 650px) {
+                max-width: 18em;
+                max-height: 16em;
+            }
+            
+            @media (max-width: 480px) {
+                max-width: 95%;
+            }
+            
+        }
+    }
+
     @media (max-width: 1024px) {
         padding: 1em 2.5em;
     }
@@ -78,38 +136,9 @@ div.recipe {
         font-weight: bold;
     }
     
-    img:first-of-type {
-        transition: max-width .5s, max-height .5s;
-        float: right;
-        max-height: 20em;
-        border: 1px solid var(--color-border-hover);
-        border-radius: 2em;
-        padding: .25em;
-        
-        &:first-of-type {
-            float: right;
-            max-width: 25em;
-            
-            @media (max-width: 1024px) {
-                max-width: 24em;
-            }
-            
-            @media (max-width: 800px) {
-                max-width: 20em;
-            }
-            
-            @media (max-width: 650px) {
-                max-width: 18em;
-            }
-            
-            @media (max-width: 480px) {
-                max-width: 95%;
-                float: none;
-            }
-        }
+    p {
+        padding: 0.35em 0;
     }
-    
-    
     
     ul {
         list-style-type: disc;

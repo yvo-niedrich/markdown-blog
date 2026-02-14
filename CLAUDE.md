@@ -30,20 +30,69 @@ The `build-index` script (node index.js) must run before `build-app`. It:
 - Generates `public/searchindex.json` (inverted search index)
 - Uses German text processing (stemming, stopwords)
 
+## Adding a New Recipe
+
+Recipe documents use YAML frontmatter to define metadata. To add a new recipe:
+
+1. **Create a markdown file** in `public/documents/{Category}/recipe-name.md`
+2. **Add frontmatter** at the top of the file with the following fields:
+   ```yaml
+   ---
+   name: Recipe Name
+   categories: Category1, Category2
+   preview: /images/recipe-image.jpg
+   tags: tag1, tag2, tag3
+   ---
+   ```
+   - `name`: Display name of the recipe (required)
+   - `categories`: Comma-separated list of categories (required)
+   - `preview`: Path to preview image relative to `public/` directory (required)
+   - `tags`: Comma-separated tags for additional classification (optional)
+
+3. **Write the recipe content** using standard markdown after the frontmatter:
+   ```markdown
+   # Recipe Name
+
+   ![alt text](../../images/recipe-image.jpg)
+
+   ## Zutaten
+   - Ingredient 1
+   - Ingredient 2
+
+   ## Zubereitung
+   1. Step 1
+   2. Step 2
+   ```
+
+4. **Add the preview image** to `public/images/` directory
+
+5. **Rebuild the index** to make the recipe searchable:
+   ```bash
+   npm run build-index
+   ```
+
+**Important Notes:**
+- The `preview` path should be relative to the `public/` directory (e.g., `/images/photo.jpg`)
+- Categories should match existing category names for consistent navigation
+- After adding/modifying recipes, always run `npm run build-index` before testing
+
 ## Architecture
 
 ### Two-Phase Build System
 
 **Phase 1: Index Generation (`index.js`)**
 - Node.js script that processes markdown recipe files
+- Extracts recipe metadata from YAML frontmatter (name, categories, preview, tags)
+- Categories are split from comma-separated strings into arrays (e.g., "Dessert, Kuchen" → ["Dessert", "Kuchen"])
 - Creates two critical JSON files consumed by the Vue app:
-  - `registry.json`: Metadata for all recipes (name, slug, path, preview image, category, modified date)
+  - `registry.json`: Metadata for all recipes (name, slug, path, preview image, category array, modified date)
   - `searchindex.json`: Inverted index mapping stemmed German tokens to recipe paths
 - German language processing:
   - Custom German stemmer (3-step suffix removal: ern/er/en → nd/ig/isch/lich → keit/ung)
   - Umlaut normalization (ä→ae, ö→oe, ü→ue, ß→ss)
   - German stopword removal using `stopword` library
   - Recipe-specific token exclusions (e.g., "Zutaten", "Gramm", "Backofen")
+  - Frontmatter is stripped before indexing; recipe name from markdown heading is weighted higher in search
 - Configurable via CLI args: `--base`, `--publicFolder`, `--documentPath`, `--maxKeywordsPerFile`
 
 **Phase 2: Vue App Build (`vite build`)**
@@ -82,6 +131,8 @@ Changes to stemming logic require updating both files, then rebuilding the index
 **Path Resolution**
 - Markdown files live in `public/documents/` with category subdirectories
 - Image paths in markdown (`![](image.png)`) are resolved relative to the markdown file
+- Preview paths in frontmatter can be absolute (`/images/photo.jpg`) or relative (`../../images/photo.jpg`)
+- Relative preview paths are resolved from the markdown file's location, not from `public/`
 - All paths converted to URLs relative to `BASE_URL` via `UrlRelativeFromPublic()`
 
 **Cache Busting**
@@ -97,7 +148,7 @@ The app deploys to GitHub Pages via `.github/workflows/publish.yml`:
 ## Important Constraints
 
 - Recipe files must be markdown (`.md`) in `public/documents/` subdirectories
-- First `# Heading` in markdown becomes the recipe name
-- First image in markdown becomes the preview image
+- Recipe metadata (name, categories, preview image) is defined via YAML frontmatter
 - The app is German-language focused (stemmer, stopwords, excluded tokens)
 - Changes to search behavior require rebuilding the index: `npm run build-index`
+- Adding or modifying recipes requires running `npm run build-index` to update registry and search index

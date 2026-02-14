@@ -8,12 +8,14 @@ import title from '@/helper/title';
 const props = defineProps<{ slug: string }>();
 const content = ref('## Loading...');
 const source = ref(import.meta.env.BASE_URL);
+const thumb = ref('');
 const { registry } = storeToRefs(useRegistryStore());
 
 watch(registry, async(registry) => {
     const recipe = registry.find(r => r?.slug == props?.slug);
     title(recipe?.name || "Lade");
     if (!recipe?.path) return;
+    thumb.value = recipe.preview || '';
     content.value = await fetch(recipe?.path).then(response => response.text());
     source.value = recipe.path;
 }, {immediate: true});
@@ -22,7 +24,7 @@ watch(registry, async(registry) => {
 
 <template>
     <div class="record">
-        <MarkdownRenderer :content="content" :source="source" />
+        <MarkdownRenderer :content="content" :source="source" :thumb="thumb" />
     </div>
 </template>
 

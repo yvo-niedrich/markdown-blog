@@ -18,8 +18,8 @@ export const useRegistryStore = defineStore('registry', () => {
         });
 
     const categories = computed(() => {
-        const c = registry.value.map(r => r.category);
-        return c.filter((value, index) => c.indexOf(value) === index).sort()
+        const c = registry.value.map(r => r.category ?? []).flat(1);
+        return c.filter((value, index) => value && c.indexOf(value) === index).sort()
     });
 
     function recent(): RecipeRegistryRecord[] {
@@ -35,7 +35,7 @@ export const useRegistryStore = defineStore('registry', () => {
     }
 
     function findByCategory(category: string): RecipeRegistryRecord[] {
-        return registry.value.filter(r => r.category === category);
+        return registry.value.filter(r => Array.isArray(r.category) ? r.category.includes(category) : r.category === category);
     }
 
 

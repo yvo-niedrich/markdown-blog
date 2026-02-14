@@ -8,7 +8,7 @@ type RecipeRegistryRecord = {
     slug: string;
     preview: ?string;
     path: string;
-    category: string;
+    category: ?string[];
     modified: Date;
     index: number;
 };
