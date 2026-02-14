@@ -48,6 +48,7 @@ function step3(word: string): string {
 export function stemmer(word: string): string {
     word = replaceSpecialChars(word);
     word = word.toLowerCase();
+
     word = step1(word);
     word = step2(word);
     word = step3(word);
