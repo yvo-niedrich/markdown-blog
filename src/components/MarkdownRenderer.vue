@@ -125,10 +125,13 @@ div.recipe {
     }
     
     h2 {
+        text-shadow:  hsla(160, 100%, 37%, .5) 0px 0px 1em;
         font-size: 1.5em;
         font-weight: bold;
         line-height: 1.5em;
         margin: .4em 0;
+
+        border-bottom: 1px solid var(--color-border);
     }
     
     h3 {
@@ -145,16 +148,12 @@ div.recipe {
     }
     
     ul, ol {
-        margin: .5em 0;
+        margin: 1em 0;
         padding-left: 1.5em; 
     }
     
     li {
-        padding-left: .2em;;
-    }
-    
-    ol li {
-        margin-bottom: 0.5em;
+        padding: 0 0 .15em .1em ;
     }
     
     blockquote {

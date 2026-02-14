@@ -122,11 +122,17 @@ export function buildRegistry(files) {
 const normalizedExcludes = normalizeTokens(excludeTokens.map(normalizeText), false);
 
 function extractKeywordsWithFrequency(text, max = Infinity) {
+    // Parse frontmatter to extract tags before stripping
+    const frontmatter = parseFrontmatter(text);
+    const tags = frontmatter.tags
+        ? frontmatter.tags.split(',').map(t => t.trim()).filter(t => t)
+        : [];
+
     // Remove frontmatter before any processing
     const content = stripFrontmatter(text);
     const normalizedText = normalizeText(content).replaceAll(markdownImageLink, '');
-    const frequency = {}; 
-    
+    const frequency = {};
+
     // Inject Recipe Name
     (content.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
         .substring(1)
@@ -135,6 +141,19 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
         .filter(token => token && token.length >= 3)
         .filter(token => !normalizedExcludes.includes(token))
         .forEach(token => frequency[token.toLowerCase()] = 10);
+
+    // Inject Tags from frontmatter
+    tags.forEach(tag => {
+        const normalizedTag = normalizeText(tag);
+        const tagTokens = normalizeTokens(tokenizer.tokenize(normalizedTag))
+            .filter(token => !normalizedExcludes.includes(token));
+
+        tagTokens.forEach(token => {
+            const lowerCaseToken = token.toLowerCase();
+            // Give tags weight of 8 (slightly less than recipe name but higher than content)
+            frequency[lowerCaseToken] = (frequency[lowerCaseToken] || 0) + 8;
+        });
+    });
 
     normalizeTokens(tokenizer.tokenize(normalizedText))
         .filter(token => !normalizedExcludes.includes(token))
@@ -152,7 +171,7 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
         .filter(k => frequency[k] > 1)
         .sort((a, b) => frequency[b] - frequency[a])
         .slice(0, max)
-        .reduce(function (acc, key) { 
+        .reduce(function (acc, key) {
             acc[key] = frequency[key];
             return acc;
         }, {});

@@ -53,8 +53,6 @@ Recipe documents use YAML frontmatter to define metadata. To add a new recipe:
    ```markdown
    # Recipe Name
 
-   ![alt text](../../images/recipe-image.jpg)
-
    ## Zutaten
    - Ingredient 1
    - Ingredient 2
