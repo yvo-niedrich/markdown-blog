@@ -1,0 +1,294 @@
+[
+  {
+    "name": "Apfelpastete",
+    "slug": "apfelpastete",
+    "path": "/markdown-blog/documents/apfelpastete.md",
+    "preview": null,
+    "category": [
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Beef 'n Guinness",
+    "slug": "beef-n-guinness",
+    "path": "/markdown-blog/documents/beefnguiness.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Blaubeerscones",
+    "slug": "blaubeerscones",
+    "path": "/markdown-blog/documents/blaubeerscones.md",
+    "preview": null,
+    "category": [
+      "Frühstück"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Brownie",
+    "slug": "brownie",
+    "path": "/markdown-blog/documents/brownies.md",
+    "preview": null,
+    "category": [
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Butterkekse mit Manchego",
+    "slug": "butterkekse-mit-manchego",
+    "path": "/markdown-blog/documents/butterkekse_mit_manchego.md",
+    "preview": "/markdown-blog/images/manchego_kekse.jpg",
+    "category": [
+      "Snacks"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Cape Town Curry",
+    "slug": "cape-town-curry",
+    "path": "/markdown-blog/documents/cape_town_curry.md",
+    "preview": "/markdown-blog/images/cape-town-chicken-curry.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Chicorée Variationen",
+    "slug": "chicoree-variationen",
+    "path": "/markdown-blog/documents/chicoree.md",
+    "preview": "/markdown-blog/images/chicoree.jpg",
+    "category": [
+      "Vorspeise",
+      "Salat"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Chili Con Carne (Thermomix)",
+    "slug": "chili-con-carne-thermomix-",
+    "path": "/markdown-blog/documents/chili_con_carne.md",
+    "preview": "/markdown-blog/images/chiliconcarne.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Chinakohl Eintopf",
+    "slug": "chinakohl-eintopf",
+    "path": "/markdown-blog/documents/chinakohl_eintopf.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Cookies",
+    "slug": "cookies",
+    "path": "/markdown-blog/documents/cookies.md",
+    "preview": "/markdown-blog/images/cookies.jpg",
+    "category": [
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Gemüse-Tajine mit Kichererbsen",
+    "slug": "gemuese-tajine-mit-kichererbse",
+    "path": "/markdown-blog/documents/gemuese_tajine.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Gewürzorangen",
+    "slug": "gewuerzorangen",
+    "path": "/markdown-blog/documents/gewuerzorangen.md",
+    "preview": "/markdown-blog/images/gewuerzorangen.jpg",
+    "category": [
+      "Dessert"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Kartoffel-Lauch-Nuss-Zitrus-Suppe",
+    "slug": "kartoffel-lauch-nuss-zitrus-su",
+    "path": "/markdown-blog/documents/kartoffel-lauch-nuss-zitrus-suppe.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Ketchup",
+    "slug": "ketchup",
+    "path": "/markdown-blog/documents/ketchup.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Krautsalat",
+    "slug": "krautsalat",
+    "path": "/markdown-blog/documents/krautsalat.md",
+    "preview": "/markdown-blog/images/Krautsalat.png",
+    "category": [
+      "Salat"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Mango-Chili-Chutney",
+    "slug": "mango-chili-chutney",
+    "path": "/markdown-blog/documents/mango_chutney.md",
+    "preview": "/markdown-blog/images/mango-chili-chutney.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Mousse au chocolat",
+    "slug": "mousse-au-chocolat",
+    "path": "/markdown-blog/documents/mousse.md",
+    "preview": null,
+    "category": [
+      "Dessert"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Nussecken",
+    "slug": "nussecken",
+    "path": "/markdown-blog/documents/nussecken.md",
+    "preview": null,
+    "category": [
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Pilz-Spinat-Lasagne",
+    "slug": "pilz-spinat-lasagne",
+    "path": "/markdown-blog/documents/pilz_spinat_lasagne.md",
+    "preview": "/markdown-blog/images/pilzlasagne.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Linsen Dal",
+    "slug": "linsen-dal",
+    "path": "/markdown-blog/documents/rote_linsen_dal.md",
+    "preview": "/markdown-blog/images/rotelinsendal.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Scones",
+    "slug": "scones",
+    "path": "/markdown-blog/documents/scones.md",
+    "preview": null,
+    "category": [
+      "Frühstück"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Smoky 3 Bean Chilli",
+    "slug": "smoky-3-bean-chilli",
+    "path": "/markdown-blog/documents/smoky_bean_chilli.md",
+    "preview": "/markdown-blog/images/three_bean_chili.jpg",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Spaghetti mit Spinat",
+    "slug": "spaghetti-mit-spinat",
+    "path": "/markdown-blog/documents/spaghetti_mit_spinat.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Gebackene Süßkartoffeln",
+    "slug": "gebackene-suesskartoffeln",
+    "path": "/markdown-blog/documents/suesskartoffel.md",
+    "preview": null,
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Tacco Salat",
+    "slug": "tacco-salat",
+    "path": "/markdown-blog/documents/taccosalat.md",
+    "preview": null,
+    "category": [
+      "Salat"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Tiramisu",
+    "slug": "tiramisu",
+    "path": "/markdown-blog/documents/tiramisu.md",
+    "preview": "/markdown-blog/images/tiramisu.jpg",
+    "category": [
+      "Dessert",
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Tiroler Kirschkuchen",
+    "slug": "tiroler-kirschkuchen",
+    "path": "/markdown-blog/documents/tiroler_kirschkuchen.md",
+    "preview": null,
+    "category": [
+      "Kuchen"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Tortelini Auflauf mit Pilzen und Frühlingszwiebeln",
+    "slug": "tortelini-auflauf-mit-pilzen-u",
+    "path": "/markdown-blog/documents/tortelini_auflauf.md",
+    "preview": "/markdown-blog/images/TorteliniAuflauf.png",
+    "category": [
+      "Hauptgericht"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  },
+  {
+    "name": "Waffeln",
+    "slug": "waffeln",
+    "path": "/markdown-blog/documents/waffeln.md",
+    "preview": null,
+    "category": [
+      "Dessert"
+    ],
+    "modified": "2026-02-15T14:42:41.352Z"
+  }
+]
