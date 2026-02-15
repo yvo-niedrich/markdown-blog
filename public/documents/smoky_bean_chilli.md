@@ -22,7 +22,7 @@ tags:
 * 1 Dose Cannellinibohnen (400 g)
 * 1 Dose Kidneybohnen (400 g)
 * 600 g Tomatenpüree oder Pasta-Sauce
-* 1 Brühwürfel (z. B. vegetarische „Rind“-Brühe oder Gemüsebrühe)
+* 1 Brühwürfel (z. B. "vegetarische Rinderbrühe" oder Gemüsebrühe)
 * 1 Teelöffel getrockneter Oregano
 * 2 Teelöffel Kakaopulver
 * 1 Teelöffel brauner Zucker

@@ -87,8 +87,8 @@ const excludeTokens = [
     'Löffel', 'Esslöffel', 'Prise', 'etwa', 'ca', 'circa', 'Backzeit', 'Backtemperatur', 'Umluft', 'Oberunterhitze', 'Zimmertemperatur',
     'Servieren', 'Serviertipp', 'optional', 'jeweils', 'beides', 'weiteren', 'weiteres', 'Zubereitungszeit', 'Portionen', 'Portion',
     'Personen', 'Person', 'Backform', 'Durchmesser', 'Hälfte', 'Hälften', 'verwenden', 'benötigt', 'benötigen', 'benötigst',
-    'Schüssel',  'Pfanne', 'Topf', 'Mixer',  'Küchenmaschine',  'Zerkleinerer', 'geben.', 'fügen', 'hinzugefügt', 'möglichst',
-    'Wasser', 'Öl', 'Butter', 'Salz', 'Pfeffer', 'Zucker', 'Mehl', 'Dosen',
+    'Schüssel',  'Pfanne', 'Topf', 'Mixer',  'Küchenmaschine',  'Zerkleinerer', 'fügen', 'hinzugefügt', 'möglichst',
+    'Wasser', 'Öl', 'Butter', 'Salz', 'Pfeffer', 'Zucker', 'Mehl', 'Dosen', 'kcal', 'Kalorien',
 ];
 
 
@@ -132,14 +132,14 @@ function extractKeywordsWithFrequency(text, max = Infinity) {
     const normalizedText = normalizeText(content).replaceAll(markdownImageLink, '');
     const frequency = {};
 
-    // Inject Recipe Name
-    (content.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '')
-        .substring(1)
-        .trim().split(/\s+/)
-        .map(token => token.trim())
-        .filter(token => token && token.length >= 3)
-        .filter(token => !normalizedExcludes.includes(token))
-        .forEach(token => frequency[token.toLowerCase()] = 10);
+    // Inject Recipe Name (use minLength=3 to include short but meaningful words like "cape")
+    const recipeName = (content.match(/^#\s+(.*?)(?:\r\n?|\n)/gm).pop() || '').substring(1).trim();
+    const recipeNameTokens = normalizeTokens(tokenizer.tokenize(normalizeText(recipeName)), false, 3)
+        .filter(token => !normalizedExcludes.includes(token));
+
+    recipeNameTokens.forEach(token => {
+        frequency[token.toLowerCase()] = 10;
+    });
 
     // Inject Tags from frontmatter
     tags.forEach(tag => {

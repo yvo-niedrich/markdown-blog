@@ -2,7 +2,7 @@
 name: Tiramisu
 categories: Dessert, Kuchen
 preview: /images/tiramisu.jpg
-tags: foo, bar
+tags: 
 
 ---
 

@@ -27,7 +27,7 @@ tags:
  - Zitronen-oder Limonensaft
  - 2 EL Olivenöl
 
-## Anweisungen
+## Zubereitung
 
 Den Basmatireis wie gewohnt mit Wasser aufsetzen. Sobald es aufkocht, Garam Masala zufügen und mitkochen.
 

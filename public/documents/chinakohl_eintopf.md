@@ -24,7 +24,7 @@ tags:
 - Öl
 - 1/2 Becher Schmand ich hatte keinen drin
 
-## Anweisungen
+## Zubereitung
 
 Zwiebel fein würfeln, Paprika in Stücke und Chinakohl in Streifen schneiden.
 

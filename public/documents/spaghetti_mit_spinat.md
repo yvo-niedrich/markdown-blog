@@ -16,7 +16,7 @@ tags:
 - 20 g Parmesan (oder z. B. Montello)
 - 200 g Spaghetti
 
-## Anweisungen
+## Zubereitung
 
 Frischen Spinat waschen, putzen und in dünne Streifen schneiden. Bei Verwendung von TK-Spinat diesen auftauen lassen und ebenfalls klein schneiden. Zwiebel abziehen und fein würfeln, Knoblauch abziehen und fein hacken. Parmesan fein reiben. Spaghetti nach Packungsanweisung kochen.
 

@@ -22,7 +22,7 @@ tags:
 - Peffer und Muskatnuss
 - 1 EL Semmelbrösel
 
-## Anweisungen
+## Zubereitung
 
 1. Die Champignons putzen und in Scheiben schneiden. Den Schinken klein würfeln. Die Frühlingszwiebeln waschen, putzen und in feine Ringe schneiden.
 2. Öl in einer Pfanne erhitzen und Champignons, Schinken und Frühlingszwiebeln darin bei mittlerer Hitze ca. 2 Minuten anbraten. 

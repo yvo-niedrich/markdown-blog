@@ -19,7 +19,7 @@ tags:
 - 2 TL Zucker
 - 1/4 L süße Sahne
 
-## Anweisungen
+## Zubereitung
 
 1. Die Schokolade mit dem ausgekratzen Mark der Vanilleschote schmelzen.
 2. Eigelb, Zucker und weiche Butter schlagen, bis eine dicke helle Creme entstanden ist. Die abgekühlte Schololade (lauwarm) zur Eier-Creme gießen und untermischen. Nicht schlagen.

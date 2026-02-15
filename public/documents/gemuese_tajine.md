@@ -34,7 +34,7 @@ tags:
 - 4 Graubrot Scheiben
 - 10 g Butter
 
-## Anweisungen
+## Zubereitung
 
 1. Kreuzkümmel in einer Pfanne ohne Fett kurz rösten und abkühlen lassen. Möhren putzen, schälen, dickere längs halbieren. Sellerie putzen, schälen und in 8 Spalten schneiden. Topinambur schälen, längs halbieren. Pfefferschote dritteln. Feigen je nach Größe halbieren oder vierteln. Rosinen und Safranfäden in 5 El warmem Wasser einweichen. Tomaten in der Dose mit einer Schere klein schneiden. 6 Tl Limettensaft auspressen und mit Honig, 1/2 Tl Fleur de sel und 1 Tl Kreuzkümmel verrühren.
 2. 2 El Öl in der Tajine erhitzen (siehe Tipp). Möhren, Sellerie und Topinambur darin bei mittlerer bis starker Hitze 2-3 Minuten braten, mit Salz und Pfeffer würzen. Limetten-Honig-Mischung, Tomaten, Fond, Safran-Rosinen, Pfefferschote, Feigen und Zimtstange unterrühren und einmal aufkochen. Mit dem Deckel verschließen und im vorgeheizten Backofen bei 190 Grad (Gas 2-3, Umluft nicht empfehlenswert) auf der untersten Schiene 45 Minuten garen.

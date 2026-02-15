@@ -25,7 +25,7 @@ tags:
  - 1 frische Chilischote, für extra scharf
  - 30 Gramm Öl
 
-## Anweisungen
+## Zubereitung
 
 1. Zwiebeln und Knoblauch in den Mixtopf geben und 5 sek. / Stufe 5 und mit dem Spatel herunterschieben.
 2. Öl hinzufügen und 2:30 Minuten / Varoma / Stufe 1.

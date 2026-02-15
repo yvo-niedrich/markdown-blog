@@ -17,5 +17,5 @@ tags:
 - 1 Pack. Vanillezucker
 - 1 Pack. Backpulver
 
-## Anweisungen
+## Zubereitung
 Butter, Zucker und die Eier sahnig rühren, nach und nach die anderen Zutaten hinzugeben.

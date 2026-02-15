@@ -19,7 +19,7 @@ tags:
  - 1/2 French Dressing Lachsfarben
  - 1/2 Miracle Wip
 
-## Anweisungen
+## Zubereitung
 
 1. Hackfleisch in Pfanne anbraten, mit Salz+Pfeffer würzen. Hälfte des Tacco-Seasoning-Mix Pulvers mit 2-3 EL Wasser aufrühren und unter heben. Anschließend Hackfleisch abkühlen lassen
 2. Eisbergsalat halbieren und in Streifen schneiden. 

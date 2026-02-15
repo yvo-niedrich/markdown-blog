@@ -18,7 +18,7 @@ tags:
 - 2 Haselnuss Tassen
 - 2 Pack. Vanillezucker
 
-## Anweisungen
+## Zubereitung
 
 1. Haselnüsse mahlen
 2. Butter erwärmen und mit Kakaopulver vermischen.

@@ -22,7 +22,7 @@ tags:
 - 200 gehackte Mandeln 
 - 200 g gehackte Haselnuss 
 
-## Anweisungen
+## Zubereitung
 
 Zutaten Mehl bis Backpulver zu einem Mürbteig verarbeiten. Auf ein Backblech dünn ausrollen.
 

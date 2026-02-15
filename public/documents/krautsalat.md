@@ -18,7 +18,7 @@ tags:
 - Pfeffer
 - 2-3 TL Kräuter oder getr. Petersilie
 
-## Anweisungen
+## Zubereitung
 
 - Kraut fein hobeln oder im TM zerkleinern.
 - Pfeffer und Petersilie auf das Kraut geben.

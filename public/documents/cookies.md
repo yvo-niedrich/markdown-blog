@@ -24,7 +24,7 @@ tags:
 - 100 g Vollmilch/Noisette-Schokolade
 - 1 EL Instantkaffee
 
-## Anweisungen
+## Zubereitung
 
 Ofen auf 170° C (Umluft) vorheizen, ein Backblech mit Backpapier auslegen (ohne es mit aufzuheizen).
 

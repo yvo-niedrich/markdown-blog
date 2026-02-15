@@ -18,5 +18,11 @@ export function normalizeToken(token: string): string {
 
 export function tokenize(query: string): string[] {
     return query.split(/\s+/g)
+        .map(token => {
+            // Unwrap: remove braces, quotes, and punctuation from beginning and end
+            // This removes: () [] {} "" '' « » ‹ › „ " and common punctuation like : ; , . ! ?
+            token = token.replace(/^[\(\[\{"""''«‹„:;,\.!\?]+|[\)\]\}"""''»›":;,\.!\?]+$/g, '');
+            return token;
+        })
         .map(stemmer);
 }

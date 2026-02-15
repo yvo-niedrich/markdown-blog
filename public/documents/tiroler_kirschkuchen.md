@@ -22,7 +22,7 @@ tags:
 - 200 g geriebene Schokolade
 - 200 g Sauerkirschen
 
-## Anweisungen
+## Zubereitung
 
 Butter, Zucker und Eidotter cremig rühren. Gewürze, Nüsse, Schokolade und das mit Backpulver vermischte Mehl dazugeben Kirschen und den Schnee unterheben.
 

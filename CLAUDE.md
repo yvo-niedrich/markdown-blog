@@ -34,45 +34,96 @@ The `build-index` script (node index.js) must run before `build-app`. It:
 
 Recipe documents use YAML frontmatter to define metadata. To add a new recipe:
 
-1. **Create a markdown file** in `public/documents/{Category}/recipe-name.md`
-2. **Add frontmatter** at the top of the file with the following fields:
-   ```yaml
-   ---
-   name: Recipe Name
-   categories: Category1, Category2
-   preview: /images/recipe-image.jpg
-   tags: tag1, tag2, tag3
-   ---
-   ```
-   - `name`: Display name of the recipe (required)
-   - `categories`: Comma-separated list of categories (required)
-   - `preview`: Path to preview image relative to `public/` directory (required)
-   - `tags`: Comma-separated tags for additional classification (optional)
+### 1. Create the Markdown File
 
-3. **Write the recipe content** using standard markdown after the frontmatter:
-   ```markdown
-   # Recipe Name
+Create a new `.md` file **directly** in `public/documents/` (not in subdirectories). Use a descriptive, lowercase filename with underscore as separator:
+```bash
+public/documents/recipe_name.md
+```
 
-   ## Zutaten
-   - Ingredient 1
-   - Ingredient 2
+Example filenames: `kartoffel_suppe.md`, `schokoladen_kuchen.md`, `pasta_carbonara.md`
 
-   ## Zubereitung
-   1. Step 1
-   2. Step 2
-   ```
+### 2. Add YAML Frontmatter
 
-4. **Add the preview image** to `public/images/` directory
+Start the file with YAML frontmatter containing recipe metadata:
 
-5. **Rebuild the index** to make the recipe searchable:
-   ```bash
-   npm run build-index
-   ```
+```yaml
+---
+name: Recipe Name
+categories: Category1, Category2
+preview: /images/recipe-image.jpg
+tags: tag1, tag2, tag3
+
+---
+```
+
+**Frontmatter Fields:**
+- `name` (required): The display name shown in the UI (e.g., "Kartoffel-Lauch-Suppe")
+- `categories` (required): Comma-separated category list. Common categories include:
+  - `Hauptgericht` - Main dishes
+  - `Dessert` - Desserts
+  - `Kuchen` - Cakes
+  - `Salat` - Salads
+  - `Beilage` - Side dishes
+  - Can use multiple: `Hauptgericht, Beilage` or `Dessert, Kuchen`
+- `preview` (optional): Path to preview image, relative to `public/` directory (e.g., `/images/soup.jpg`)
+  - Leave empty if no image available (just `preview:` with nothing after)
+- `tags` (optional): Comma-separated tags for additional classification (e.g., `vegetarisch, vegan, schnell`)
+  - Leave empty if not using tags (just `tags:` with nothing after)
+
+**Note:** Leave a blank line after the closing `---`
+
+### 3. Write the Recipe Content
+
+After the frontmatter, write the recipe using standard markdown. The typical structure is:
+
+```markdown
+# Recipe Name
+
+## Zutaten
+
+- 500 g Ingredient 1
+- 2 Stück Ingredient 2
+- 1 TL Ingredient 3
+- Salz, Pfeffer
+
+## Zubereitung
+
+1. First preparation step with detailed instructions.
+
+2. Second step explaining the next action.
+
+3. Third step, and so on.
+
+4. Final step and serving suggestions.
+```
+
+**German Section Headings:**
+- `## Zutaten` - Ingredients list (use bulleted list with `-`)
+- `## Zubereitung` - Preparation steps (use numbered list with `1.`, `2.`, etc.)
+
+### 4. Add Preview Image (Optional)
+
+If you have a preview image:
+1. Add the image file to `public/images/` directory
+2. Update the `preview:` field in frontmatter with the path: `/images/your-image.jpg`
+
+### 5. Rebuild the Index
+
+After creating or modifying any recipe, rebuild the search index and registry:
+```bash
+npm run build-index
+```
+
+This generates `public/registry.json` and `public/searchindex.json` so the recipe appears in the app.
 
 **Important Notes:**
-- The `preview` path should be relative to the `public/` directory (e.g., `/images/photo.jpg`)
-- Categories should match existing category names for consistent navigation
-- After adding/modifying recipes, always run `npm run build-index` before testing
+- Recipe files go directly in `public/documents/`, not in category subdirectories
+- File names should use lowercase and underscore (e.g., `rote_linsen_dal.md`)
+- The recipe name in the markdown heading (`# Recipe Name`) should match the `name` field in frontmatter
+- Categories in frontmatter are comma-separated strings, not arrays
+- Always run `npm run build-index` after adding/modifying recipes
+- Preview images are optional - leave the field empty if you don't have an image yet
 
 ## Architecture
 
@@ -127,7 +178,7 @@ The German stemmer implementation exists in TWO places and must stay identical:
 Changes to stemming logic require updating both files, then rebuilding the index.
 
 **Path Resolution**
-- Markdown files live in `public/documents/` with category subdirectories
+- Markdown files are stored directly in `public/documents/` (flat structure, no category subdirectories)
 - Image paths in markdown (`![](image.png)`) are resolved relative to the markdown file
 - Preview paths in frontmatter can be absolute (`/images/photo.jpg`) or relative (`../../images/photo.jpg`)
 - Relative preview paths are resolved from the markdown file's location, not from `public/`
@@ -145,7 +196,7 @@ The app deploys to GitHub Pages via `.github/workflows/publish.yml`:
 
 ## Important Constraints
 
-- Recipe files must be markdown (`.md`) in `public/documents/` subdirectories
+- Recipe files must be markdown (`.md`) stored directly in `public/documents/`
 - Recipe metadata (name, categories, preview image) is defined via YAML frontmatter
 - The app is German-language focused (stemmer, stopwords, excluded tokens)
 - Changes to search behavior require rebuilding the index: `npm run build-index`

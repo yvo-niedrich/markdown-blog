@@ -36,6 +36,7 @@ watch([registry, index, props], async([registry, index]) => {
 
     results.value = Object.keys(paths)
         .filter(p => paths[p] >= tokens.length)
+        .sort((a, b) => paths[b] - paths[a])
         .map(p => registry.find(r => r.path === p))
         .filter(removeUndefined);
 }, {immediate: true});

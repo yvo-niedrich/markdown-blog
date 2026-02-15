@@ -23,7 +23,7 @@ tags:
 - Rosmarin frisch
 - Thymian frisch
 
-## Anweisungen
+## Zubereitung
 
 1. Bacon in den Topf geben und anbraten. Danach aus dem Topf nehmen, aber so viel Fett wie möglich zurück lassen
 2. Gemüsezwiebel im Fett ca. 2 anbraten
