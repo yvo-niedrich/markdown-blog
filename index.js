@@ -108,7 +108,7 @@ export function buildRegistry(files) {
 
         registry.push({
             name,
-            'slug': normalizeText(name).replace(/([\W]+)/g, '-').substring(0, 30).toLowerCase(),
+            'slug': normalizeText(name).replace(/([\W]+)/g, '-').substring(0, 36).toLowerCase(),
             'path': UrlRelativeFromPublic(file, publicPath, applicationBasePath, resolvePath),
             'preview': UrlRelativeFromPublic(previewPath, publicPath, applicationBasePath, resolvePath),
             'category': categories,
