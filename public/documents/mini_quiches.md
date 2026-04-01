@@ -1,6 +1,6 @@
 ---
 name: Mini-Quiches
-categories: Snack, Fingerfood
+categories: Snacks
 preview: /images/mini_quiches.jpg
 tags: pikant, Schinken, vegetarisch
 
