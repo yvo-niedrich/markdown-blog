@@ -59,13 +59,15 @@ tags: tag1, tag2, tag3
 
 **Frontmatter Fields:**
 - `name` (required): The display name shown in the UI (e.g., "Kartoffel-Lauch-Suppe")
-- `categories` (required): Comma-separated category list. Common categories include:
+- `categories` (required): Comma-separated category list. Available categories include:
+  - `Frühstück` - Breakfast (or brunch)
   - `Hauptgericht` - Main dishes
   - `Dessert` - Desserts
   - `Kuchen` - Cakes
   - `Salat` - Salads
   - `Beilage` - Side dishes
-  - Can use multiple: `Hauptgericht, Beilage` or `Dessert, Kuchen`
+  - `Snacks` - Snacks and nibbles
+  - Can use multiple: `Hauptgericht, Beilage` or `Dessert, Kuchen` but must be at least one
 - `preview` (optional): Path to preview image, relative to `public/` directory (e.g., `/images/soup.jpg`)
   - Leave empty if no image available (just `preview:` with nothing after)
 - `tags` (optional): Comma-separated tags for additional classification (e.g., `vegetarisch, vegan, schnell`)

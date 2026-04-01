@@ -1,8 +1,8 @@
 ---
 name: Mini-Quiches
-categories: Snacks
+categories: Snacks, Frühstück
 preview: /images/mini_quiches.jpg
-tags: pikant, Schinken, vegetarisch
+tags: vegetarisch, brunch
 
 ---
 
