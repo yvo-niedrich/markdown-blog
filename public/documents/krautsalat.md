@@ -1,7 +1,7 @@
 ---
 name: Krautsalat
 categories: Salat
-preview: /images/Krautsalat.png
+preview: /images/Krautsalat.jpg
 tags:
 
 ---

@@ -40,9 +40,11 @@ tags: suppe, fleisch, erkältung
 
 7. Das Hühnerfleisch in die Suppe geben und mit Salz und Pfeffer abschmecken. Die Petersilie abspülen, trockenschütteln und hacken. Kurz vorm Servieren über die Hühnersuppe verteilen.
 
-**Tipp:** Lorbeerblätter, Nelken und Pfefferkörner zusammen in einen Teefilter geben.
+> **Tipp**
+> Lorbeerblätter, Nelken und Pfefferkörner zusammen in einen Teefilter geben.
 
-**Tipp:** Besonders wärmend ist das Süppchen, wenn man ein Stück Ingwerwurzel mitkocht. Das verstärkt den wärmenden Effekt und gibt einen Hauch Schärfe. Gerne auch einen Spritzer Zitrone, passt auch prima zum Ingweraroma. Ich koche immer gleich große Mengen und friere sie portionsweise ein als Basis für Saucen. Oder einfach im Winter eine leckere Hühnersuppe genießen.
+> **Tipp**
+> Besonders wärmend ist das Süppchen, wenn man ein Stück Ingwerwurzel mitkocht. Das verstärkt den wärmenden Effekt und gibt einen Hauch Schärfe. Gerne auch einen Spritzer Zitrone, passt auch prima zum Ingweraroma. Ich koche immer gleich große Mengen und friere sie portionsweise ein als Basis für Saucen. Oder einfach im Winter eine leckere Hühnersuppe genießen.
 
 ---
 > **Warum Hühnersuppe hilft**
